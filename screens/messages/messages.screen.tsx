@@ -1,6 +1,10 @@
 import React from 'react';
 import { Text } from 'react-native-paper';
 
+import { SafeArea } from '../../components/safe-area.component';
+
 export const MessagesScreen = () => (
-  <Text variant="headlineMedium">Messages Screen</Text>
+  <SafeArea>
+    <Text variant="headlineMedium">Messages Screen</Text>
+  </SafeArea>
 );
