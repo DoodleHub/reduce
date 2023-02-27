@@ -6,7 +6,7 @@ import { UtilitiesStackParamList } from '../types';
 const UtilitiesStack = createStackNavigator<UtilitiesStackParamList>();
 
 export const UtilitiesNavigation = () => (
-  <UtilitiesStack.Navigator>
+  <UtilitiesStack.Navigator screenOptions={{ headerShown: false }}>
     <UtilitiesStack.Screen name="Root" component={UtilitiesScreen} />
   </UtilitiesStack.Navigator>
 );

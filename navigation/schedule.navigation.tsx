@@ -5,7 +5,7 @@ import { ScheduleScreen } from '../screens/schedule/schedule.screen';
 const ScheduleStack = createStackNavigator();
 
 export const ScheduleNavigation = () => (
-  <ScheduleStack.Navigator>
+  <ScheduleStack.Navigator screenOptions={{ headerShown: false }}>
     <ScheduleStack.Screen name="Root" component={ScheduleScreen} />
   </ScheduleStack.Navigator>
 );
