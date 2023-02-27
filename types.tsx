@@ -1,3 +1,5 @@
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+
 export type RootTabParamList = {
   Utilities: undefined;
   Schedule: undefined;
@@ -20,3 +22,5 @@ export type MessagesStackParamList = {
 export type AccountStackParamList = {
   Root: undefined;
 };
+
+export type RootTabScreenProps = BottomTabScreenProps<RootTabParamList>;
