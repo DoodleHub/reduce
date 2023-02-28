@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTheme } from 'react-native-paper';
 
 import { UtilitiesNavigation } from './utilities.navigation';
 import { ScheduleNavigation } from './schedule.navigation';
@@ -19,6 +20,7 @@ const TAB_ICON = {
 
 const createScreenOptions = ({ route }: RootTabScreenProps) => {
   const iconName = TAB_ICON[route.name];
+  const theme = useTheme();
 
   return {
     headerShown: false,
@@ -33,6 +35,8 @@ const createScreenOptions = ({ route }: RootTabScreenProps) => {
         color={color}
       />
     ),
+    tabBarActiveTintColor: theme.colors.primary,
+    tabBarInactiveTinyColor: theme.colors.secondary,
   };
 };
 
