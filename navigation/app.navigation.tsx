@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
 
-import { UtilitiesNavigation } from './utilities.navigation';
+import { TimerNavigation } from './timer.navigation';
 import { ScheduleNavigation } from './schedule.navigation';
 import { MessagesNavigation } from './messages.navigation';
 import { AccountNavigation } from './account.navigation';
@@ -42,7 +42,7 @@ const createScreenOptions = ({ route }: RootTabScreenProps) => {
 
 export const AppNavigation = () => (
   <Tab.Navigator screenOptions={createScreenOptions}>
-    <Tab.Screen name="Utilities" component={UtilitiesNavigation} />
+    <Tab.Screen name="Utilities" component={TimerNavigation} />
     <Tab.Screen name="Schedule" component={ScheduleNavigation} />
     <Tab.Screen name="Messages" component={MessagesNavigation} />
     <Tab.Screen name="Account" component={AccountNavigation} />
