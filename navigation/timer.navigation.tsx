@@ -1,12 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TimerScreen } from '../screens/timer/timer.screen';
-import { UtilitiesStackParamList } from '../types';
+import { TimerStackParamList } from '../types';
 
-const UtilitiesStack = createStackNavigator<UtilitiesStackParamList>();
+const TimerStack = createStackNavigator<TimerStackParamList>();
 
 export const TimerNavigation = () => (
-  <UtilitiesStack.Navigator screenOptions={{ headerShown: false }}>
-    <UtilitiesStack.Screen name="Root" component={TimerScreen} />
-  </UtilitiesStack.Navigator>
+  <TimerStack.Navigator screenOptions={{ headerShown: false }}>
+    <TimerStack.Screen name="Root" component={TimerScreen} />
+  </TimerStack.Navigator>
 );

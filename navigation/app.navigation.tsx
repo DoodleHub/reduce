@@ -12,7 +12,7 @@ import { RootTabParamList, RootTabScreenProps } from '../types';
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const TAB_ICON = {
-  Utilities: 'tools',
+  Timer: 'tools',
   Schedule: 'calendar-month-outline',
   Messages: 'message-text-outline',
   Account: 'account-outline',
@@ -37,12 +37,13 @@ const createScreenOptions = ({ route }: RootTabScreenProps) => {
     ),
     tabBarActiveTintColor: theme.colors.primary,
     tabBarInactiveTinyColor: theme.colors.secondary,
+    tabBarActiveBackgroundColor: theme.colors.surfaceVariant,
   };
 };
 
 export const AppNavigation = () => (
   <Tab.Navigator screenOptions={createScreenOptions}>
-    <Tab.Screen name="Utilities" component={TimerNavigation} />
+    <Tab.Screen name="Timer" component={TimerNavigation} />
     <Tab.Screen name="Schedule" component={ScheduleNavigation} />
     <Tab.Screen name="Messages" component={MessagesNavigation} />
     <Tab.Screen name="Account" component={AccountNavigation} />

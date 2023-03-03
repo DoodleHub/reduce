@@ -8,9 +8,7 @@ export default function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Navigation />
-      </ThemeProvider>
+      <Navigation />
       <StatusBar style="auto" />
     </>
   );
