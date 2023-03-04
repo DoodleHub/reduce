@@ -1,10 +1,13 @@
 import React from 'react';
+import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { SafeArea } from '../../components/safe-area.component';
 
 export const AccountScreen = () => (
   <SafeArea>
-    <Text variant="headlineMedium">Account Screen</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text variant="headlineMedium">Coming soon...</Text>
+    </View>
   </SafeArea>
 );
