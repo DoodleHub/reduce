@@ -1,12 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  useTheme,
-  Text,
-  SegmentedButtons,
-  MD3Colors,
-} from 'react-native-paper';
+import { Text, SegmentedButtons, MD3Colors } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatDuration, intervalToDuration } from 'date-fns';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -15,6 +11,7 @@ import {
   ProgressText,
   StyledProgressBar,
 } from './timer-item.styles';
+import { TimerStackNavProp } from '../../types';
 
 type TimerItemProps = {
   name: string;
@@ -22,6 +19,7 @@ type TimerItemProps = {
 };
 
 export const TimerItem = ({ name, duration }: TimerItemProps) => {
+  const navigation = useNavigation<TimerStackNavProp>();
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(duration);
   const interval = useRef<ReturnType<typeof setInterval>>();
@@ -62,7 +60,7 @@ export const TimerItem = ({ name, duration }: TimerItemProps) => {
         <MaterialCommunityIcons
           name="dots-horizontal"
           size={20}
-          onPress={() => {}}
+          onPress={() => navigation.navigate('EditTimer')}
         />
       </HeaderContainer>
       <ProgressBarContainer>
