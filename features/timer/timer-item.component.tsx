@@ -15,11 +15,12 @@ import {
 import { TimerStackNavProp } from '../../types';
 
 type TimerItemProps = {
+  id: number;
   name: string;
   duration: number;
 };
 
-export const TimerItem = ({ name, duration }: TimerItemProps) => {
+export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
   const navigation = useNavigation<TimerStackNavProp>();
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(duration);
@@ -64,7 +65,10 @@ export const TimerItem = ({ name, duration }: TimerItemProps) => {
             name="clock-edit-outline"
             size={24}
             onPress={() =>
-              navigation.navigate('EditTimer', { timerName: name })
+              navigation.navigate('EditTimer', {
+                id,
+                timerName: name,
+              })
             }
           />
           <MaterialCommunityIcons

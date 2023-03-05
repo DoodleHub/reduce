@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+
 import { TimerItem } from './timer-item.component';
-import { Wrapper } from './timer-list.styles';
+
+import { StyledFAB, StyledScrollView, Wrapper } from './timer-list.styles';
 
 export const TimerList = () => {
   const timers = [
@@ -11,16 +12,23 @@ export const TimerList = () => {
   ];
 
   return (
-    <ScrollView>
+    <StyledScrollView>
       <Wrapper>
         {timers.map(timer => (
           <TimerItem
             key={timer.id}
+            id={timer.id}
             name={timer.name}
             duration={timer.duration}
           />
         ))}
       </Wrapper>
-    </ScrollView>
+      <StyledFAB
+        icon="plus"
+        variant="surface"
+        size="medium"
+        onPress={() => {}}
+      />
+    </StyledScrollView>
   );
 };

@@ -11,7 +11,7 @@ export type RootTabParamList = {
 
 export type TimerStackParamList = {
   Root: undefined;
-  EditTimer: { timerName: string };
+  EditTimer: { id: number; timerName: string; create?: boolean };
 };
 
 export type ScheduleStackParamList = {
@@ -31,3 +31,9 @@ export type RootTabScreenProps = BottomTabScreenProps<RootTabParamList>;
 export type TimerStackNavProp = StackNavigationProp<TimerStackParamList>;
 
 export type TimerStackRouteProp = RouteProp<TimerStackParamList>;
+
+export type Timer = {
+  id: number;
+  name: string;
+  duration: number;
+};
