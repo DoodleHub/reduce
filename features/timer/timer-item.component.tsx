@@ -60,7 +60,7 @@ export const TimerItem = ({ name, duration }: TimerItemProps) => {
         <MaterialCommunityIcons
           name="dots-horizontal"
           size={20}
-          onPress={() => navigation.navigate('EditTimer')}
+          onPress={() => navigation.navigate('EditTimer', { timerName: name })}
         />
       </HeaderContainer>
       <ProgressBarContainer>

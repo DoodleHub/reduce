@@ -1,5 +1,6 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 
 export type RootTabParamList = {
   Timer: undefined;
@@ -10,7 +11,7 @@ export type RootTabParamList = {
 
 export type TimerStackParamList = {
   Root: undefined;
-  EditTimer: undefined;
+  EditTimer: { timerName: string };
 };
 
 export type ScheduleStackParamList = {
@@ -28,3 +29,5 @@ export type AccountStackParamList = {
 export type RootTabScreenProps = BottomTabScreenProps<RootTabParamList>;
 
 export type TimerStackNavProp = StackNavigationProp<TimerStackParamList>;
+
+export type TimerStackRouteProp = RouteProp<TimerStackParamList>;
