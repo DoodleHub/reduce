@@ -11,7 +11,12 @@ export type RootTabParamList = {
 
 export type TimerStackParamList = {
   Root: undefined;
-  EditTimer: { id: number; timerName: string; create?: boolean };
+  EditTimer: {
+    id?: number;
+    timerName?: string;
+    create?: boolean;
+    duration?: number;
+  };
 };
 
 export type ScheduleStackParamList = {

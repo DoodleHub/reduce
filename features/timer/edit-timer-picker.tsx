@@ -1,28 +1,34 @@
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 
-import { StyledPicker } from './edit-timer.styles';
+import { Container } from './edit-timer-picker.styles';
 import { Text } from 'react-native-paper';
 
 type EditTimerPickerProps = {
-  duration: number;
-  value: unknown;
-  setValue: React.Dispatch<unknown>;
+  max: number;
+  value: number;
+  setValue: React.Dispatch<number>;
   type: string;
 };
 
 export const EditTimerPicker = ({
-  duration,
+  max,
   value,
   setValue,
   type,
 }: EditTimerPickerProps) => (
   <>
-    <StyledPicker selectedValue={value} onValueChange={setValue}>
-      {[...Array(duration).keys()].map(index => (
-        <Picker.Item key={index} label={`${index.toString()}`} value={index} />
-      ))}
-    </StyledPicker>
+    <Container>
+      <Picker selectedValue={value} onValueChange={setValue}>
+        {[...Array(max).keys()].map(index => (
+          <Picker.Item
+            key={index}
+            label={`${index.toString()}`}
+            value={index}
+          />
+        ))}
+      </Picker>
+    </Container>
     <Text variant="labelLarge">{type}</Text>
   </>
 );

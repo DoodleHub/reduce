@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, TextInput } from 'react-native-paper';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { TouchableWithoutFeedback, Keyboard, View } from 'react-native';
 
 import { PickerContainer, Wrapper } from './edit-timer.styles';
-import { TimerStackRouteProp } from '../../types';
+import { TimerStackNavProp, TimerStackRouteProp } from '../../types';
 import { EditTimerPicker } from './edit-timer-picker';
+import { TimerContext } from '../../services/timer/timer.context';
 
 export const EditTimer = () => {
+  const { addTimer, updateTimer } = useContext(TimerContext);
+  const navigation = useNavigation<TimerStackNavProp>();
   const { params } = useRoute<TimerStackRouteProp>();
-  const [hour, setHour] = useState<unknown>(0);
-  const [minute, setMinute] = useState<unknown>(0);
-  const [second, setSecond] = useState<unknown>(0);
-  const [name, setName] = useState(params?.timerName);
+  const [hour, setHour] = useState<number>(0);
+  const [minute, setMinute] = useState<number>(0);
+  const [second, setSecond] = useState<number>(0);
+  const [name, setName] = useState(params?.timerName || '');
+  const [duration, setDuration] = useState(params?.duration || 0);
+
+  useEffect(() => {
+    setDuration((hour * 60 * 60 + minute * 60 + second) * 1000);
+  }, [hour, minute, second]);
+
+  useEffect(() => {
+    setHour(Math.floor(duration / 1000 / 60 / 60));
+    setMinute(Math.floor(((duration / 1000) % 60) / 60));
+    setSecond(Math.floor(((duration / 1000) % 60) % 60));
+  }, []);
+
+  const handleSave = () => {
+    if (params?.create) {
+      addTimer(name, duration);
+    } else if (params?.id) {
+      updateTimer(params.id, name, duration);
+    }
+
+    navigation.navigate('Root');
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -25,19 +49,19 @@ export const EditTimer = () => {
         />
         <PickerContainer>
           <EditTimerPicker
-            duration={24}
+            max={24}
             value={hour}
             setValue={setHour}
             type="hour"
           />
           <EditTimerPicker
-            duration={60}
+            max={60}
             value={minute}
             setValue={setMinute}
             type="min"
           />
           <EditTimerPicker
-            duration={60}
+            max={60}
             value={second}
             setValue={setSecond}
             type="sec"
@@ -46,7 +70,7 @@ export const EditTimer = () => {
         <Button
           icon="checkbox-marked-circle-outline"
           mode="contained"
-          onPress={() => {}}
+          onPress={handleSave}
         >
           Save
         </Button>

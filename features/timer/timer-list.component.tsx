@@ -1,15 +1,15 @@
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useContext } from 'react';
+import { TimerContext } from '../../services/timer/timer.context';
 
 import { TimerItem } from './timer-item.component';
+import { TimerStackNavProp } from '../../types';
 
 import { StyledFAB, StyledScrollView, Wrapper } from './timer-list.styles';
 
 export const TimerList = () => {
-  const timers = [
-    { id: 1, name: 'Salmon', duration: 100000 },
-    { id: 2, name: 'Steak', duration: 50000 },
-    { id: 3, name: 'Chicken', duration: 1000000 },
-  ];
+  const { timers } = useContext(TimerContext);
+  const navigation = useNavigation<TimerStackNavProp>();
 
   return (
     <StyledScrollView>
@@ -27,7 +27,7 @@ export const TimerList = () => {
         icon="plus"
         variant="surface"
         size="medium"
-        onPress={() => {}}
+        onPress={() => navigation.navigate('EditTimer', { create: true })}
       />
     </StyledScrollView>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Text, SegmentedButtons, MD3Colors } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatDuration, intervalToDuration } from 'date-fns';
@@ -13,6 +13,7 @@ import {
   StyledProgressBar,
 } from './timer-item.styles';
 import { TimerStackNavProp } from '../../types';
+import { TimerContext } from '../../services/timer/timer.context';
 
 type TimerItemProps = {
   id: number;
@@ -21,6 +22,7 @@ type TimerItemProps = {
 };
 
 export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
+  const { removeTimer } = useContext(TimerContext);
   const navigation = useNavigation<TimerStackNavProp>();
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(duration);
@@ -40,6 +42,10 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
       clearInterval(interval.current);
     }
   }, [isPaused]);
+
+  useEffect(() => {
+    setTime(duration);
+  }, [duration]);
 
   const handleButtonPress = (action: string) => {
     switch (action) {
@@ -68,6 +74,7 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
               navigation.navigate('EditTimer', {
                 id,
                 timerName: name,
+                duration,
               })
             }
           />
@@ -75,7 +82,7 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
             name="trash-can-outline"
             size={24}
             color={MD3Colors.error50}
-            onPress={() => {}}
+            onPress={() => removeTimer(id)}
           />
         </HeaderIconContainer>
       </HeaderContainer>

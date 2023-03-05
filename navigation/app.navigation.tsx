@@ -8,6 +8,7 @@ import { ScheduleNavigation } from './schedule.navigation';
 import { MessagesNavigation } from './messages.navigation';
 import { AccountNavigation } from './account.navigation';
 import { RootTabParamList, RootTabScreenProps } from '../types';
+import { TimerContextProvider } from '../services/timer/timer.context';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -42,10 +43,12 @@ const createScreenOptions = ({ route }: RootTabScreenProps) => {
 };
 
 export const AppNavigation = () => (
-  <Tab.Navigator screenOptions={createScreenOptions}>
-    <Tab.Screen name="Timer" component={TimerNavigation} />
-    <Tab.Screen name="Schedule" component={ScheduleNavigation} />
-    <Tab.Screen name="Messages" component={MessagesNavigation} />
-    <Tab.Screen name="Account" component={AccountNavigation} />
-  </Tab.Navigator>
+  <TimerContextProvider>
+    <Tab.Navigator screenOptions={createScreenOptions}>
+      <Tab.Screen name="Timer" component={TimerNavigation} />
+      <Tab.Screen name="Schedule" component={ScheduleNavigation} />
+      <Tab.Screen name="Messages" component={MessagesNavigation} />
+      <Tab.Screen name="Account" component={AccountNavigation} />
+    </Tab.Navigator>
+  </TimerContextProvider>
 );
