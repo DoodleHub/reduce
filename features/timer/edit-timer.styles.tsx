@@ -14,7 +14,6 @@ export const PickerContainer = styled(View)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
 `;
 
 export const StyledPicker = styled(Picker)`

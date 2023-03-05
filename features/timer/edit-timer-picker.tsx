@@ -20,7 +20,7 @@ export const EditTimerPicker = ({
   <>
     <StyledPicker selectedValue={value} onValueChange={setValue}>
       {[...Array(duration).keys()].map(index => (
-        <Picker.Item label={`${index.toString()}`} value={index} />
+        <Picker.Item key={index} label={`${index.toString()}`} value={index} />
       ))}
     </StyledPicker>
     <Text variant="labelLarge">{type}</Text>
