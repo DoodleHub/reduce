@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import {
   Container,
   HeaderContainer,
+  HeaderIconContainer,
   ProgressBarContainer,
   ProgressText,
   StyledProgressBar,
@@ -48,6 +49,7 @@ export const TimerItem = ({ name, duration }: TimerItemProps) => {
         setIsPaused(true);
         break;
       case 'reset':
+        setIsPaused(true);
         setTime(duration);
         break;
     }
@@ -57,11 +59,21 @@ export const TimerItem = ({ name, duration }: TimerItemProps) => {
     <Container>
       <HeaderContainer>
         <Text variant="headlineSmall">{name}</Text>
-        <MaterialCommunityIcons
-          name="dots-horizontal"
-          size={20}
-          onPress={() => navigation.navigate('EditTimer', { timerName: name })}
-        />
+        <HeaderIconContainer>
+          <MaterialCommunityIcons
+            name="clock-edit-outline"
+            size={24}
+            onPress={() =>
+              navigation.navigate('EditTimer', { timerName: name })
+            }
+          />
+          <MaterialCommunityIcons
+            name="trash-can-outline"
+            size={24}
+            color={MD3Colors.error50}
+            onPress={() => {}}
+          />
+        </HeaderIconContainer>
       </HeaderContainer>
       <ProgressBarContainer>
         <StyledProgressBar

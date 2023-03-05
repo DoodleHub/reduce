@@ -15,6 +15,12 @@ export const HeaderContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 5px;
+`;
+
+export const HeaderIconContainer = styled(View)`
+  flex-direction: row;
+  gap: 10px;
 `;
 
 export const ProgressBarContainer = styled(View)`
