@@ -15,7 +15,7 @@ export const HeaderContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 `;
 
 export const HeaderIconContainer = styled(View)`

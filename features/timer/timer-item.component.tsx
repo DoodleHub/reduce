@@ -27,14 +27,22 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(duration);
   const interval = useRef<ReturnType<typeof setInterval>>();
-  const displayTime = formatDuration(
+  const formattedTime = formatDuration(
     intervalToDuration({ start: 0, end: time })
   );
 
   useEffect(() => {
     if (!isPaused) {
       interval.current = setInterval(() => {
-        setTime((time: number) => time - 1000);
+        setTime((time: number) => {
+          const nextDuration = time - 1000;
+
+          if (nextDuration === 0) {
+            clearInterval(interval.current);
+          }
+
+          return time - 1000;
+        });
       }, 1000);
 
       return () => clearInterval(interval.current);
@@ -61,6 +69,8 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
         break;
     }
   };
+
+  const displayTime = () => (time === 0 ? 'Done!' : formattedTime);
 
   return (
     <Container>
@@ -92,7 +102,7 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
           color={MD3Colors.primary50}
         />
       </ProgressBarContainer>
-      <ProgressText variant="labelLarge">{displayTime}</ProgressText>
+      <ProgressText variant="labelLarge">{displayTime()}</ProgressText>
       <SegmentedButtons
         value=""
         onValueChange={handleButtonPress}
