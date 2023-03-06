@@ -3,6 +3,7 @@ import { Text, SegmentedButtons, MD3Colors } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatDuration, intervalToDuration } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
+import { Audio } from 'expo-av';
 
 import {
   Container,
@@ -30,6 +31,25 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
   const formattedTime = formatDuration(
     intervalToDuration({ start: 0, end: time })
   );
+  const [sound, setSound] = React.useState<Audio.Sound>();
+
+  const playSound = async () => {
+    const { sound } = await Audio.Sound.createAsync(
+      require('../../assets/apple_alarm_clock.mp3')
+    );
+    setSound(sound);
+
+    await sound.playAsync();
+    await sound.setIsLoopingAsync(true);
+  };
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
 
   useEffect(() => {
     if (!isPaused) {
@@ -39,6 +59,8 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
 
           if (nextDuration === 0) {
             clearInterval(interval.current);
+            setIsPaused(true);
+            playSound();
           }
 
           return time - 1000;
@@ -55,7 +77,7 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
     setTime(duration);
   }, [duration]);
 
-  const handleButtonPress = (action: string) => {
+  const handleButtonPress = async (action: string) => {
     switch (action) {
       case 'start':
         setIsPaused(false);
@@ -66,6 +88,7 @@ export const TimerItem = ({ id, name, duration }: TimerItemProps) => {
       case 'reset':
         setIsPaused(true);
         setTime(duration);
+        await sound?.unloadAsync();
         break;
     }
   };
