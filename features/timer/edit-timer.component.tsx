@@ -14,9 +14,9 @@ export const EditTimer = () => {
   const { params } = useRoute<TimerStackRouteProp>();
   const [hour, setHour] = useState<number>(0);
   const [minute, setMinute] = useState<number>(0);
-  const [second, setSecond] = useState<number>(0);
-  const [name, setName] = useState(params?.timerName || '');
-  const [duration, setDuration] = useState(params?.duration || 0);
+  const [second, setSecond] = useState<number>(1);
+  const [name, setName] = useState(params?.timerName || 'Timer');
+  const [duration, setDuration] = useState(params?.duration || 1000);
 
   useEffect(() => {
     setDuration((hour * 60 * 60 + minute * 60 + second) * 1000);

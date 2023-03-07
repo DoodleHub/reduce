@@ -20,13 +20,15 @@ export const EditTimerPicker = ({
   <>
     <Container>
       <Picker selectedValue={value} onValueChange={setValue}>
-        {[...Array(max).keys()].map(index => (
-          <Picker.Item
-            key={index}
-            label={`${index.toString()}`}
-            value={index}
-          />
-        ))}
+        {[...Array(max).keys()]
+          .filter(index => !(type === 'sec' && index === 0))
+          .map(index => (
+            <Picker.Item
+              key={index}
+              label={`${index.toString()}`}
+              value={index}
+            />
+          ))}
       </Picker>
     </Container>
     <Text variant="labelLarge">{type}</Text>

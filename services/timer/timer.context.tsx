@@ -30,6 +30,7 @@ export const TimerContextProvider = ({
 
   useEffect(() => {
     const fetchTimers = async () => {
+      AsyncStorage.clear();
       const timersString = await AsyncStorage.getItem('@timers');
       const timers =
         timersString !== null ? await JSON.parse(timersString) : [];

@@ -6,7 +6,6 @@ import { TimerItem } from './timer-item.component';
 import { TimerStackNavProp } from '../../types';
 
 import { StyledFAB, StyledScrollView, Wrapper } from './timer-list.styles';
-import { View } from 'react-native';
 
 export const TimerList = () => {
   const { timers } = useContext(TimerContext);
