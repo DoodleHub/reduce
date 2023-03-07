@@ -44,11 +44,12 @@ const createScreenOptions = ({ route }: RootTabScreenProps) => {
 
 export const AppNavigation = () => (
   <TimerContextProvider>
-    <Tab.Navigator screenOptions={createScreenOptions}>
+    <TimerNavigation />
+    {/* <Tab.Navigator screenOptions={createScreenOptions}>
       <Tab.Screen name="Timer" component={TimerNavigation} />
       <Tab.Screen name="Schedule" component={ScheduleNavigation} />
       <Tab.Screen name="Messages" component={MessagesNavigation} />
       <Tab.Screen name="Account" component={AccountNavigation} />
-    </Tab.Navigator>
+    </Tab.Navigator> */}
   </TimerContextProvider>
 );
